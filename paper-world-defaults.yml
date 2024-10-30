@@ -1,25 +1,10 @@
-# This is the world defaults configuration file for Paper.
-# As you can see, there's a lot to configure. Some options may impact gameplay, so use
-# with caution, and make sure you know what each option does before configuring.
-# 
-# If you need help with the configuration or have any questions related to Paper,
-# join us in our Discord or check the docs page.
-# 
-# Configuration options here apply to all worlds, unless you specify overrides inside
-# the world-specific config file inside each world folder.
-# 
-# Docs: https://docs.papermc.io/
-# Discord: https://discord.gg/papermc
-# Website: https://papermc.io/
-
-_version: 30
+_version: 31
 anticheat:
   anti-xray:
     enabled: false
     engine-mode: 1
     hidden-blocks:
-    - diamond_ore
-    - deepslate_diamond_ore
+    - chest
     lava-obscures: false
     max-block-height: 64
     max-chunk-section-index: 3
@@ -30,11 +15,11 @@ anticheat:
   obfuscation:
     items:
       hide-durability: false
-      hide-itemmeta: true
+      hide-itemmeta: false
       hide-itemmeta-with-visual-effects: false
 chunks:
-  auto-save-interval: '6000'
-  delay-chunk-unloads-by: 6s
+  auto-save-interval: default
+  delay-chunk-unloads-by: 10s
   entity-per-chunk-save-limit:
     arrow: 16
     dragon_fireball: 3
@@ -88,9 +73,10 @@ entities:
     ender-dragons-death-always-places-dragon-egg: true
     experience-merge-max-value: -1
     mobs-can-always-pick-up-loot:
-      skeletons: true
-      zombies: true
+      skeletons: false
+      zombies: false
     nerf-pigmen-from-nether-portals: false
+    only-merge-items-horizontally: true
     parrots-are-unaffected-by-player-movement: true
     phantoms-do-not-spawn-on-creative-players: true
     phantoms-only-attack-insomniacs: true
@@ -119,7 +105,6 @@ entities:
       wither: true
       wither-skeleton: true
     spiders-immune-to-poison-effect: true
-    undead-immune-to-certain-effects: true
   sniffer:
     boosted-hatch-time: default
     hatch-time: default
@@ -131,31 +116,32 @@ entities:
         cobblestone: 300
     count-all-mobs-for-spawning: false
     creative-arrow-despawn-rate: '600'
+    despawn-range-shape: ELLIPSOID
     despawn-ranges:
       ambient:
-        hard: 72
-        soft: 48
+        hard: default
+        soft: default
       axolotls:
-        hard: 72
-        soft: 48
+        hard: default
+        soft: default
       creature:
-        hard: 72
-        soft: 48
+        hard: default
+        soft: default
       misc:
-        hard: 72
-        soft: 48
+        hard: default
+        soft: default
       monster:
-        hard: 84
-        soft: 72
+        hard: default
+        soft: default
       underground_water_creature:
-        hard: 72
-        soft: 48
+        hard: default
+        soft: default
       water_ambient:
-        hard: 72
-        soft: 36
+        hard: default
+        soft: default
       water_creature:
-        hard: 72
-        soft: 48
+        hard: default
+        soft: default
     disable-mob-spawner-spawn-egg-transformation: true
     duplicate-uuid:
       mode: SAFE_REGEN
@@ -169,18 +155,18 @@ entities:
     - SleepingZ
     iron-golems-can-spawn-in-air: false
     monster-spawn-max-light-level: default
-    non-player-arrow-despawn-rate: '320'
+    non-player-arrow-despawn-rate: default
     per-player-mob-spawns: true
     scan-for-legacy-ender-dragon: false
-    skeleton-horse-thunder-spawn-chance: 0.0
+    skeleton-horse-thunder-spawn-chance: default
     slime-spawn-height:
       slime-chunk:
-        maximum: 55.0
+        maximum: 40.0
       surface-biome:
         maximum: 70.0
-        minimum: 5.0
+        minimum: 50.0
     spawn-limits:
-      ambient: 0
+      ambient: -1
       axolotls: -1
       creature: -1
       monster: -1
@@ -207,15 +193,15 @@ entities:
   tracking-range-y:
     animal: default
     display: default
-    enabled: false
+    enabled: true
     misc: default
     monster: default
     other: default
     player: default
 environment:
-  disable-explosion-knockback: true
+  disable-explosion-knockback: false
   disable-ice-and-snow: false
-  disable-teleportation-suffocation-check: false
+  disable-teleportation-suffocation-check: true
   disable-thunder: false
   fire-tick-delay: 30
   frosted-ice:
@@ -224,6 +210,7 @@ environment:
       min: 20
     enabled: true
   generate-flat-bedrock: false
+  locate-structures-outside-world-border: false
   max-block-ticks: 65536
   max-fluid-ticks: 65536
   nether-ceiling-void-damage-height: disabled
@@ -236,7 +223,9 @@ environment:
     find-already-discovered:
       loot-tables: 'true'
       villager-trade: true
-  water-over-lava-flow-speed: 3
+  void-damage-amount: 4.0
+  void-damage-min-build-height-offset: -64.0
+  water-over-lava-flow-speed: 5
 feature-seeds:
   generate-random-seeds-for-all: false
 fishing-time-range:
@@ -247,13 +236,13 @@ fixes:
   falling-block-height-nerf: disabled
   fix-items-merging-through-walls: true
   fix-wither-targeting-bug: true
-  prevent-tnt-from-moving-in-water: true
+  prevent-tnt-from-moving-in-water: false
   remove-corrupt-tile-entities: true
   split-overstacked-loot: true
   tnt-entity-height-nerf: disabled
 hopper:
   cooldown-when-full: true
-  disable-move-event: true
+  disable-move-event: false
   ignore-occluding-blocks: true
 lootables:
   auto-replenish: false
@@ -263,9 +252,10 @@ lootables:
   reset-seed-on-fill: false
   restrict-player-reloot: true
   restrict-player-reloot-time: disabled
+  retain-unlooted-shulker-box-loot-table-on-non-player-break: true
 maps:
   item-frame-cursor-limit: 32
-  item-frame-cursor-update-interval: 80
+  item-frame-cursor-update-interval: 40
 max-growth-height:
   bamboo:
     max: 16
@@ -273,6 +263,7 @@ max-growth-height:
   cactus: 3
   reeds: 3
 misc:
+  alternate-current-update-order: HORIZONTAL_FIRST_OUTWARD
   disable-end-credits: true
   disable-relative-projectile-velocity: false
   disable-sprint-interruption-on-attack: false
@@ -295,7 +286,7 @@ tick-rates:
     villager:
       acquirepoi: 120
       validatenearbypoi: 60
-  container-update: 2
+  container-update: 1
   dry-farmland: 1
   grass-spread: 4
   mob-spawner: 10
@@ -308,7 +299,7 @@ tick-rates:
       villagerbabiessensor: 40
   wet-farmland: 1
 unsupported-settings:
-  disable-world-ticking-when-empty: false
+  disable-world-ticking-when-empty: true
   fix-invulnerable-end-crystal-exploit: true
 world_nether:
   anti-xray:
